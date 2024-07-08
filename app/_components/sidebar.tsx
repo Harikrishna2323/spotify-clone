@@ -8,6 +8,8 @@ import { Box } from "./box";
 import { ModeToggle } from "@/components/toggle-theme";
 import { Library } from "./library";
 import { Song } from "@/types";
+import { usePlayer } from "@/hooks/use-player";
+import { cn } from "@/lib/utils";
 
 interface SidebarProps {
   children: React.ReactNode;
@@ -16,6 +18,7 @@ interface SidebarProps {
 
 export const SideBar = ({ children, songs }: SidebarProps) => {
   const pathname = usePathname();
+  const player = usePlayer();
 
   const routes = useMemo(
     () => [
@@ -36,7 +39,9 @@ export const SideBar = ({ children, songs }: SidebarProps) => {
   );
 
   return (
-    <div className="flex h-full">
+    <div
+      className={cn(`flex h-full`, player.activeId && "h-[calc(100%-80px)]")}
+    >
       <div className="hidden md:flex flex-col gap-y-2  h-full w-[300px] p-2">
         <div className="mx-auto ">
           <Suspense fallback={<ModeToggle.Skeleton />}>

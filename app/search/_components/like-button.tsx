@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 
 import { useAuthModal } from "@/hooks/use-auth-modal";
 import { useUser } from "@/hooks/use-user";
-import { Heart, HeartIcon, HeartOff, LucideHeart } from "lucide-react";
+import { HeartIcon, HeartOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
@@ -25,7 +25,7 @@ export const LikeButton = ({ songId }: LikeButtonProps) => {
   const [isLiked, setIsLiked] = useState(false);
 
   useEffect(() => {
-    if (user?.id) {
+    if (!user?.id) {
       return;
     }
 
@@ -52,7 +52,7 @@ export const LikeButton = ({ songId }: LikeButtonProps) => {
       size={25}
     />
   ) : (
-    <HeartOff className="hover:opacity-75" size={25} />
+    <HeartIcon className="hover:opacity-75" size={25} />
   );
 
   const handleLike = async () => {

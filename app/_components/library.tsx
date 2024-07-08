@@ -6,6 +6,7 @@ import { useUser } from "@/hooks/use-user";
 import { Song } from "@/types";
 import { ListMusic, LucidePlusCircle } from "lucide-react";
 import { MediaItem } from "./media-item";
+import { useOnPlay } from "@/hooks/use-onplay";
 
 interface LibraryProps {
   songs: Song[];
@@ -14,6 +15,8 @@ export const Library = ({ songs }: LibraryProps) => {
   const { user } = useUser();
   const authModal = useAuthModal();
   const uploadModal = useUploadModal();
+
+  const onPlay = useOnPlay(songs);
 
   const onClick = () => {
     if (!user) {
@@ -40,7 +43,13 @@ export const Library = ({ songs }: LibraryProps) => {
 
       <div className="flex flex-col gap-y-2 mt-4 px-3">
         {songs.map((song) => {
-          return <MediaItem key={song.id} data={song} onClick={() => {}} />;
+          return (
+            <MediaItem
+              key={song.id}
+              data={song}
+              onClick={(id: string) => onPlay(id)}
+            />
+          );
         })}
       </div>
     </div>

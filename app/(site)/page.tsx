@@ -17,7 +17,7 @@ export default async function Home() {
             Welcome back
           </h1>
           <div className="bg-none border-none">
-            <ListItem image="/liked.jpg" name="Liked Songs" href="/" />
+            <ListItem image="/liked.jpg" name="Liked Songs" href="/liked" />
           </div>
         </div>
       </Header>
